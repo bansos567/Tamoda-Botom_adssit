@@ -17,6 +17,7 @@ import android.view.WindowManager;
 
 import com.google.appinventor.components.annotations.*;
 import com.google.appinventor.components.common.ComponentCategory;
+import com.google.appinventor.components.common.PropertyCategory;
 import com.google.appinventor.components.common.PropertyTypeConstants;
 import com.google.appinventor.components.runtime.AndroidNonvisibleComponent;
 import com.google.appinventor.components.runtime.AndroidViewComponent;
@@ -31,8 +32,6 @@ import com.google.appinventor.components.runtime.EventDispatcher;
     iconName = ""
 )
 @SimpleObject(external = true)
-@UsesLibraries(libraries = "")
-@UsesPermissions(permissionNames = "")
 
 public class Botomshet_Radius extends AndroidNonvisibleComponent {
 
@@ -57,34 +56,34 @@ public class Botomshet_Radius extends AndroidNonvisibleComponent {
     // =================================================================
 
     @DesignerProperty(editorType = PropertyTypeConstants.PROPERTY_TYPE_COLOR, defaultValue = "&H00000000")
-    @SimpleProperty(description = "Warna background Bottom Sheet.")
+    @SimpleProperty(description = "Warna background Bottom Sheet.", category = PropertyCategory.APPEARANCE)
     public void BackgroundColor(int color) {
         this.bgColor = color;
     }
 
-    @SimpleProperty(description = "Ambil warna background saat ini.")
+    @SimpleProperty(description = "Ambil warna background saat ini.", category = PropertyCategory.APPEARANCE)
     public int BackgroundColor() {
         return this.bgColor;
     }
 
     @DesignerProperty(editorType = PropertyTypeConstants.PROPERTY_TYPE_FLOAT, defaultValue = "20.0")
-    @SimpleProperty(description = "Lengkungan sudut atas (Radius).")
+    @SimpleProperty(description = "Lengkungan sudut atas (Radius).", category = PropertyCategory.APPEARANCE)
     public void Radius(float radius) {
         this.cornerRadius = radius;
     }
 
-    @SimpleProperty
+    @SimpleProperty(category = PropertyCategory.APPEARANCE)
     public float Radius() {
         return this.cornerRadius;
     }
 
     @DesignerProperty(editorType = PropertyTypeConstants.PROPERTY_TYPE_BOOLEAN, defaultValue = "False")
-    @SimpleProperty(description = "Set TRUE jika ingin tombol Back HP bisa menutup menu ini.")
+    @SimpleProperty(description = "Set TRUE jika ingin tombol Back HP bisa menutup menu ini.", category = PropertyCategory.BEHAVIOR)
     public void Cancelable(boolean cancelable) {
         this.isCancelable = cancelable;
     }
 
-    @SimpleProperty
+    @SimpleProperty(category = PropertyCategory.BEHAVIOR)
     public boolean Cancelable() {
         return this.isCancelable;
     }
