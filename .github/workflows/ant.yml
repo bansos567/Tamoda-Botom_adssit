@@ -1,0 +1,43 @@
+name: Build Extension with Ant
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch: # Memungkinkan bos klik tombol "Run workflow" manual
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. Mengambil kode dari repository bos (Versi v4 terbaru)
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive # Penting jika template MIT menggunakan submodule
+
+    # 2. Menyiapkan Java 8 (Wajib untuk ekstensi Kodular/Android lama)
+    - name: Set up JDK 8
+      uses: actions/setup-java@v4
+      with:
+        java-version: '8'
+        distribution: 'temurin'
+
+    # 3. Memastikan Apache Ant terinstal di mesin GitHub
+    - name: Setup Apache Ant
+      run: |
+        sudo apt-get update
+        sudo apt-get install ant -y
+
+    # 4. Mengeksekusi perintah build ke sistem App Inventor
+    - name: Compile Extension
+      run: ant extensions
+
+    # 5. Menyimpan dan mengunggah hasil file .aix (Versi v4 terbaru)
+    - name: Upload AIX Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: Botomshet-Tamoda-V8
+        path: out/*.aix
